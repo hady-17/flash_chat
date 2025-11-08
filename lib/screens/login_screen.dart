@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../components/Btn.dart';
+import '../constants.dart';
+import '../components/pass_field.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = 'login_screen';
@@ -27,64 +29,16 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             SizedBox(height: 48.0),
             TextField(
+              style: TextStyle(color: Colors.black),
               onChanged: (value) {
                 //Do something with the user input.
               },
-              decoration: InputDecoration(
-                hintText: 'Enter your email',
-                contentPadding: EdgeInsets.symmetric(
-                  vertical: 10.0,
-                  horizontal: 20.0,
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.lightBlueAccent,
-                    width: 1.0,
-                  ),
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.lightBlueAccent,
-                    width: 2.0,
-                  ),
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                ),
+              decoration: kTextFieldDecoration.copyWith(
+                hintText: 'Enter your email.',
               ),
             ),
             SizedBox(height: 8.0),
-            TextField(
-              onChanged: (value) {
-                //Do something with the user input.
-              },
-              decoration: InputDecoration(
-                hintText: 'Enter your password.',
-                contentPadding: EdgeInsets.symmetric(
-                  vertical: 10.0,
-                  horizontal: 20.0,
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.lightBlueAccent,
-                    width: 1.0,
-                  ),
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.lightBlueAccent,
-                    width: 2.0,
-                  ),
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                ),
-              ),
-            ),
+            PassField(),
             SizedBox(height: 24.0),
             Hero(
               tag: 'login_btn',
