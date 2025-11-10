@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "313451398274",
+    "project_id": "flashchat-5f55d",
+    "storage_bucket": "flashchat-5f55d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:313451398274:android:a2b16c5dd0bc60bfd8e09b",
+        "android_client_info": {
+          "package_name": "com.example.flash_chat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSAhsxWE2DEROF6R2rnuUWjFYmsheeJfo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:313451398274:android:187da411c7adc488d8e09b",
+        "android_client_info": {
+          "package_name": "com.hady.flash_chat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSAhsxWE2DEROF6R2rnuUWjFYmsheeJfo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

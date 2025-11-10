@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'login_screen.dart';
 import 'registration_screen.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
-import '../components/Btn.dart';
+import '../components/btn.dart';
 
 class WelcomeScreen extends StatefulWidget {
+  const WelcomeScreen({super.key});
+
   static const String id = 'welcome_screen';
   @override
-  _WelcomeScreenState createState() => _WelcomeScreenState();
+  State<WelcomeScreen> createState() => _WelcomeScreenState();
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen>
@@ -19,7 +21,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   void initState() {
     super.initState();
     controller = AnimationController(
-      duration: Duration(seconds: 1),
+      duration: Duration(seconds: 3),
       vsync: this,
     );
     //animation = CurvedAnimation(parent: controller!, curve: Curves.decelerate);
@@ -61,9 +63,9 @@ class _WelcomeScreenState extends State<WelcomeScreen>
               children: <Widget>[
                 Hero(
                   tag: 'logo',
-                  child: Container(
-                    child: Image.asset('images/logo.png'),
+                  child: SizedBox(
                     height: 60.0,
+                    child: Image.asset('images/logo.png'),
                   ),
                 ),
                 AnimatedTextKit(
@@ -74,7 +76,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                         fontSize: 45.0,
                         fontWeight: FontWeight.w900,
                       ),
-                      speed: Duration(milliseconds: 200),
+                      speed: Duration(milliseconds: 300),
                     ),
                   ],
                   totalRepeatCount: 1,
