@@ -31,3 +31,13 @@ const kTextFieldDecoration = InputDecoration(
     borderRadius: BorderRadius.all(Radius.circular(32.0)),
   ),
 );
+
+/// Default message bubble decoration
+const kMessageDecoration = BoxDecoration(
+  color: Colors.lightBlueAccent,
+  borderRadius: BorderRadius.only(
+    topLeft: Radius.circular(30.0),
+    topRight: Radius.circular(30.0),
+    bottomLeft: Radius.circular(30.0),
+  ),
+);

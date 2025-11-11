@@ -17,7 +17,8 @@ class _LoginScreenState extends State<LoginScreen> {
   bool showSpinner = false;
   String? email;
   String? password;
-  final FirebaseAuth _auth = FirebaseAuth.instance; // Firebase Auth instance
+  FirebaseAuth get _auth =>
+      FirebaseAuth.instance; // Firebase Auth instance (lazy)
 
   Future<void> loginUser(String email, String password) async {
     try {

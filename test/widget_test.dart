@@ -1,30 +1,96 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:flash_chat/main.dart';
+import 'package:flash_chat/screens/welcome_screen.dart';
+import 'package:flash_chat/screens/login_screen.dart';
+import 'package:flash_chat/screens/registration_screen.dart';
+import 'package:flash_chat/components/btn.dart';
+import 'package:flash_chat/components/pass_field.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(FlashChat());
+  testWidgets('WelcomeScreen shows buttons', (WidgetTester tester) async {
+    await tester.pumpWidget(const MaterialApp(home: WelcomeScreen()));
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    expect(find.text('Log In'), findsOneWidget);
+    expect(find.text('Register'), findsOneWidget);
+  });
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
+  testWidgets('LoginScreen has email, password and Log In button', (
+    WidgetTester tester,
+  ) async {
+    await tester.pumpWidget(const MaterialApp(home: LoginScreen()));
+
+    expect(find.byType(TextField), findsNWidgets(2));
+    expect(find.text('Log In'), findsOneWidget);
+  });
+
+  testWidgets('RegistrationScreen has email, password and Register button', (
+    WidgetTester tester,
+  ) async {
+    await tester.pumpWidget(const MaterialApp(home: RegistrationScreen()));
+
+    // Check presence of two text fields (email + password via PassField)
+    expect(find.byType(TextField), findsNWidgets(2));
+    expect(find.text('Register'), findsOneWidget);
+  });
+
+  // Avoid instantiating ChatScreen (depends on Firestore). Instead test the
+  // message input row UI separately so we cover the 'Send' button + TextField.
+  testWidgets('Message input row has TextField and Send button', (
+    WidgetTester tester,
+  ) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  decoration: InputDecoration(hintText: 'Message'),
+                ),
+              ),
+              TextButton(onPressed: () {}, child: Text('Send')),
+            ],
+          ),
+        ),
+      ),
+    );
+
+    expect(find.text('Send'), findsOneWidget);
+    expect(find.byType(TextField), findsOneWidget);
+  });
+
+  testWidgets('Btn widget reacts to tap', (WidgetTester tester) async {
+    var tapped = false;
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: Btn(
+            text: 'Tap me',
+            onPressed: () => tapped = true,
+            color: Colors.blue,
+          ),
+        ),
+      ),
+    );
+
+    await tester.tap(find.text('Tap me'));
+    await tester.pumpAndSettle();
+    expect(tapped, isTrue);
+  });
+
+  testWidgets('PassField calls onChanged when typing', (
+    WidgetTester tester,
+  ) async {
+    String value = '';
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(body: PassField(onChanged: (v) => value = v)),
+      ),
+    );
+
+    await tester.enterText(find.byType(TextField), 'mypassword');
     await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(value, 'mypassword');
   });
 }

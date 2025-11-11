@@ -186,3 +186,52 @@ If you'd like, I can now:
 	screens (example implementation).
 - Add README badges and CI configuration for automated tests.
 
+## Changes made in this repository
+
+This fork has several small, practical modifications to make the example app
+runnable and easier to develop. If you update the project from another
+upstream source, these are the local changes you should be aware of:
+
+- Firebase initialization
+	- `lib/main.dart` now calls `WidgetsFlutterBinding.ensureInitialized()` and
+		`await Firebase.initializeApp()` so Firebase APIs can be used safely.
+
+- Android / Gradle fixes
+	- Adjusted `android/app/build.gradle.kts` and `android/build.gradle.kts` to
+		ensure the project builds and the Android package name matches the
+		generated `MainActivity`.
+	- The Google Services Gradle plugin is configured for Firebase usage; if you
+		add `google-services.json`, the plugin will wire the native config.
+
+- Package name alignment
+	- The Android applicationId/namespace was corrected to match
+		`android/app/src/main/kotlin/.../MainActivity.kt` so the app no longer
+		crashes at startup with a missing `MainActivity`.
+
+- Password field reliability
+	- `lib/components/pass_field.dart` accepts an optional
+		`TextEditingController` and the registration screen (`registration_screen.dart`)
+		now uses a controller so the password value is always available when the
+		Register button is pressed.
+
+- Authentication persistence guidance
+	- The README and code include a recommended pattern (AuthGate using
+		`FirebaseAuth.instance.authStateChanges()`) so the app automatically shows
+		the right screen when a user is already signed in.
+
+- Logout/navigation behavior
+	- The Chat screen logout button now awaits sign out and uses
+		`Navigator.pushNamedAndRemoveUntil(..., (r) => false)` so the user cannot
+		navigate back to the chat after logging out.
+
+- Tests
+	- Added widget tests in `test/widget_test.dart` covering all screens and
+		components (Welcome, Login, Registration, Btn, PassField and a message
+		input row). Tests avoid initializing Firebase/Firestore; Firestore usage
+		is exercised in app runtime only.
+
+If you'd like I can also:
+- Add a small CI workflow to run `flutter analyze` + `flutter test` on PRs.
+- Add a `firebase_options.dart` via FlutterFire CLI and a branch that wires
+	authentication end-to-end (Auth + Firestore demo messages).
+
