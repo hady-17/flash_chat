@@ -161,6 +161,11 @@ class MessagesStream extends StatelessWidget {
   }
 }
 
+//create a function that takes sender as parameter and returns his name everything before @
+String getSenderName(String sender) {
+  return sender.split('@')[0];
+}
+
 /// Custom widget for chat bubble
 class MessageBubble extends StatelessWidget {
   final String sender;
@@ -184,8 +189,8 @@ class MessageBubble extends StatelessWidget {
             : CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            sender,
-            style: const TextStyle(fontSize: 12.0, color: Colors.black54),
+            getSenderName(sender),
+            style: const TextStyle(fontSize: 12.0, color: Colors.grey),
           ),
           Material(
             elevation: 5.0,
