@@ -83,10 +83,11 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: ModalProgressHUD(
         //change spinner color
-        progressIndicator: CircularProgressIndicator(color: Colors.black),
+        progressIndicator: CircularProgressIndicator(
+          color: Theme.of(context).colorScheme.primary,
+        ),
         inAsyncCall: showSpinner,
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.0),
@@ -105,7 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
               TextField(
                 textAlign: TextAlign.center,
                 keyboardType: TextInputType.emailAddress,
-                style: TextStyle(color: Colors.black),
+                style: Theme.of(context).textTheme.bodyMedium,
                 onChanged: (value) {
                   //Do something with the user input.
                   email = value;
@@ -136,7 +137,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       showSpinner = false;
                     });
                   },
-                  color: Colors.lightBlueAccent,
                 ),
               ),
             ],

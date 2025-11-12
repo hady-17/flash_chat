@@ -17,7 +17,7 @@ class _PassFieldState extends State<PassField> {
   Widget build(BuildContext context) {
     return TextField(
       textAlign: TextAlign.center,
-      style: const TextStyle(color: Colors.black),
+      style: Theme.of(context).textTheme.bodyMedium,
       obscureText: _obscureText,
       onChanged: (value) {
         widget.onChanged(value);
@@ -27,7 +27,7 @@ class _PassFieldState extends State<PassField> {
         suffixIcon: IconButton(
           icon: Icon(
             _obscureText ? Icons.visibility : Icons.visibility_off,
-            color: Colors.grey,
+            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
           ),
           onPressed: () {
             setState(() {

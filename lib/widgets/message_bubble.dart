@@ -21,7 +21,12 @@ class MessageBubble extends StatelessWidget {
         children: <Widget>[
           Text(
             _getSenderName(message.senderEmail),
-            style: const TextStyle(fontSize: 12.0, color: Colors.grey),
+            style: TextStyle(
+              fontSize: 12.0,
+              color: Theme.of(
+                context,
+              ).textTheme.bodySmall?.color?.withOpacity(0.6),
+            ),
           ),
           Material(
             elevation: 5.0,
@@ -36,7 +41,9 @@ class MessageBubble extends StatelessWidget {
                     bottomLeft: Radius.circular(30.0),
                     bottomRight: Radius.circular(30.0),
                   ),
-            color: isMe ? Colors.lightBlueAccent : Colors.white,
+            color: isMe
+                ? Theme.of(context).colorScheme.primary
+                : Theme.of(context).colorScheme.surface,
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 vertical: 10.0,
@@ -45,7 +52,9 @@ class MessageBubble extends StatelessWidget {
               child: Text(
                 message.text,
                 style: TextStyle(
-                  color: isMe ? Colors.white : Colors.black54,
+                  color: isMe
+                      ? Theme.of(context).colorScheme.onPrimary
+                      : Theme.of(context).colorScheme.onSurface,
                   fontSize: 15.0,
                 ),
               ),

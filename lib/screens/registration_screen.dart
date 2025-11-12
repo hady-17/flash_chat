@@ -24,11 +24,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: ModalProgressHUD(
-        inAsyncCall:
-            showSpinner, // Set this to true while waiting for registration
-        progressIndicator: CircularProgressIndicator(color: Colors.black),
+        inAsyncCall: showSpinner,
+        // Use theme primary color for spinner
+        progressIndicator: CircularProgressIndicator(
+          color: Theme.of(context).colorScheme.primary,
+        ),
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.0),
           child: Column(
@@ -46,7 +47,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               TextField(
                 keyboardType: TextInputType.emailAddress,
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.black),
+                style: Theme.of(context).textTheme.bodyMedium,
                 onChanged: (value) {
                   //Do something with the user input.
                   email = value;
@@ -78,7 +79,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       showSpinner = false;
                     });
                   },
-                  color: Colors.blueAccent,
                 ),
               ),
             ],

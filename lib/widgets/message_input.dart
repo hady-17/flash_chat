@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../constants.dart';
 
 /// Widget for the message input field and send button.
 ///
@@ -37,8 +36,11 @@ class _MessageInputState extends State<MessageInput> {
 
   @override
   Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
     return Container(
-      decoration: kMessageContainerDecoration,
+      decoration: BoxDecoration(
+        border: Border(top: BorderSide(color: cs.primary, width: 2.0)),
+      ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
@@ -51,12 +53,32 @@ class _MessageInputState extends State<MessageInput> {
                 });
               },
               onSubmitted: (_) => _handleSend(),
-              decoration: kMessageTextFieldDecoration,
+              decoration: InputDecoration(
+                contentPadding: const EdgeInsets.symmetric(
+                  vertical: 10.0,
+                  horizontal: 20.0,
+                ),
+                hintText: 'Type your message here...',
+                hintStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.onSurface.withOpacity(0.6),
+                ),
+                border: InputBorder.none,
+              ),
             ),
           ),
           TextButton(
             onPressed: _handleSend,
-            child: const Text('Send', style: kSendButtonTextStyle),
+            style: TextButton.styleFrom(foregroundColor: cs.primary),
+            child: Text(
+              'Send',
+              style: TextStyle(
+                color: cs.primary,
+                fontWeight: FontWeight.bold,
+                fontSize: 18.0,
+              ),
+            ),
           ),
         ],
       ),
